@@ -2,6 +2,7 @@ import NavBar from './components/NavBar'
 import Home from './components/Home'
 import About from './components/About'
 import RestaurantDetail from './components/SearchFolder/RestaurantDetail'
+import TryAgain from './components/SearchFolder/TryAgain'
 import './App.css';
 
 import { useState } from 'react';
@@ -39,6 +40,7 @@ function App() {
         <Route path="/about" element={<About />} /> 
         <Route path="/" element={<Home getUserCoordinates={getUserCoordinates} locationError={locationError} lat={lat} long={long} />} />
         <Route path="/restaurants/:id" element={<RestaurantDetail />} />
+        <Route path="/tryagain" element={<TryAgain />} />
       </Routes>  
                         
     </div>

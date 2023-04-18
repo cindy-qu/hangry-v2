@@ -4,8 +4,8 @@ import { NavLink } from 'react-router-dom';
 const NavBar = () => {
   return (
     <div className="bg-purple-background ">
-        <div className="flex text-left py-4">
-            <NavLink className="font-semibold text-2xl px-4" to="/">
+        <div className="flex text-left py-4 text-purple-font">
+            <NavLink className=" font-semibold text-2xl px-4" to="/">
                 Hangry
             </NavLink>
             <NavLink className="px-2 pt-1" to="/">

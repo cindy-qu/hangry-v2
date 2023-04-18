@@ -6,9 +6,10 @@ class Api::V1::YelpController < ApplicationController
         rest_cuisine = params[:cuisine]
         rest_latitude = params[:latitude]
         rest_longitude = params[:longitude]
+        rest_price = params[:price]
         response = RestClient::Request.execute(
           method: "GET",
-          url: "https://api.yelp.com/v3/businesses/search?term=#{rest_cuisine}&latitude=#{rest_latitude}&longitude=#{rest_longitude}&limit=20",
+          url: "https://api.yelp.com/v3/businesses/search?term=#{rest_cuisine}&latitude=#{rest_latitude}&longitude=#{rest_longitude}&price=#{rest_price}&limit=20",
           headers: { Authorization: "Bearer #{ENV["YELP_KEY"]}" }
         )
           results = JSON.parse(response)
