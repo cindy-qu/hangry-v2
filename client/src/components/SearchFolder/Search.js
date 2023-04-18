@@ -106,39 +106,13 @@ const Search = ({ locationError, lat, long }) => {
            },
            body: JSON.stringify(data)
        })
-       // .then((res)=> {setLoading(false)})
 
        let responseJson = await response.json()
        return responseJson.businesses
-       // .then(res => res.json()
-       // .then((info) => { setDataYelp(info.businesses)}
-       // ))
-  
-       // .then(console.log(dataYelp,lat,long))
-       // return  dataYelp
-
-       
-       // const data = {cuisine: cuisine, location: location };
-       // console.log(data)
-       // return fetch("http://localhost:3000/api/v1/search", {
-       // method: "POST",
-       // mode: 'no-cors',
-       // headers: {
-       //     'Accept': 'application/json',
-       //     'Content-Type': 'application/json',
-       // },
-       // body: JSON.stringify(data),
-       // })
-
-       // .then(res => res.json())
-       // .then(data => console.log("Printing data: ", data));
-       // // .then(results => this.props.dispatch({ type: "SEARCH_RESULTS", payload: results }))
+      
    }
 
-    // useEffect(() => {
-    //     fetchRestaurant()
-        
-    // },[])
+
 
     const handleClick = async (e) => {
         e.preventDefault();
@@ -178,19 +152,22 @@ const Search = ({ locationError, lat, long }) => {
 
     }
   return (
-    <div >
-        <p className = "flex justify-center "> Get a restaurant based on your location, price range, and category!</p>
-        <div className = "flex justify-center ">
+    <div className="
+    py-10 px-5 mx-0
+    2xl:py-20
+    min-w-full flex flex-col text-center">
+        <p > Get a restaurant based on your location, price range, and category!</p>
+        <div className = "px-3 flex justify-center mt-3">
             <form onSubmit={handleClick}> 
-                <select className="rounded-md outline outline-1 outline-[#ced4da]" value={price} onChange={handlePrice} required>
+                <select className="py-0.5 rounded-md outline outline-1 outline-[#ced4da]" value={price} onChange={handlePrice} required>
                     <option value="1">$</option>
                     <option value="2">$$</option>
                     <option value="3">$$$</option>
                     <option value="4">$$$$</option>
                 </select>
-                <input className="rounded-md outline outline-1 outline-[#ced4da]" type="text" name="food" onChange={handleCuisine} placeholder="What are you craving?" autoComplete = "off" required/>
+                <input className="py-0.5 px-0.5 rounded-md outline outline-1 outline-[#ced4da]" type="text" name="food" onChange={handleCuisine} placeholder="What are you craving?" autoComplete = "off" required/>
                 
-                <button className="px-3 py-1 rounded-md bg-sky-700 text-white inline-flex items-center" type="submit">
+                <button className="mt-3 px-3 py-1 rounded-md bg-sky-700 hover:bg-sky-800 text-white inline-flex items-center" type="submit">
                    {loadClassSearch}
                 </button>
 
@@ -198,13 +175,12 @@ const Search = ({ locationError, lat, long }) => {
             </form>
 
         </div>
-
-        {/* <div className = "bg-cover bg-center bg-no-repeat h-[1000px] bg-[url('./ImagesFolder/searchimage.jpg')]">
-
-        </div> */}
-        <button className="px-3 py-1 rounded-md bg-sky-700 text-white inline-flex items-center" onClick={handleAdventureClick}>
-            {loadAdventureClassSearch}
-        </button>        
+        <p className="pt-10">Get a restaurant only based on your location!</p>
+        <div className = "flex justify-center ">
+            <button className="mt-3 px-3 py-1 rounded-md bg-sky-700 hover:bg-sky-800 text-white inline-flex items-center" onClick={handleAdventureClick}>
+                {loadAdventureClassSearch}
+            </button>   
+        </div>    
     </div>
   )
 }
