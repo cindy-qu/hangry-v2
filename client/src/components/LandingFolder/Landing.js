@@ -82,7 +82,10 @@ const Landing = () => {
   
   <div style={styles.header}>
   <div style={styles.content} >
-    <h1 className="font-nunito text-7xl font-black text-dark-color pt-20 text-center">
+    
+    <h1 className="font-nunito 
+    text-7xl sm:text-8xl md:text-9xl  xl:text-9xl 2xl:text-9xl
+    font-black text-dark-color pt-20 text-center">
       
     <svg fill="#223966" className="w-10 h-10 mx-auto" viewBox="0 -0.5 122.88 122.88" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" >
       <g>
@@ -93,7 +96,12 @@ const Landing = () => {
     Hangry</h1>
     
 
-    <h2 className="font-nunito text-xl font-bold text-dark-color pt-10 text-left pl-8" >Can't decide where to get ...
+    <h2 className="font-nunito font-bold text-dark-color 
+    pt-10 
+    text-left 
+    text-xl sm:text-4xl md:text-4xl lg:text-5xl xl:text-5xl 2xl:text-6xl
+    pl-8 sm:pl-24 md:pl-32 lg:pl-60 xl:pl-72 2xl:pl-96" >
+      Can't decide where to get ...
               <span className="text-1">breakfast</span>
               <span className="text-2">lunch</span>
               <span className="text-3">dinner</span>  
@@ -105,7 +113,11 @@ const Landing = () => {
 
     </h2>
 
-    <h2 className="font-nunito text-2xl font-bold text-dark-color text-center pt-10">Let Hangry decide for you!</h2>
+    <h2 className="font-nunito 
+    text-2xl sm:text-4xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-5xl
+    font-bold text-dark-color text-center 
+    pt-10 2xl:pt-20
+    ">Let Hangry decide for you!</h2>
     <div className="flex justify-center">
     <button onClick = {handleClick} className="font-nunito font-bold px-7 py-2 rounded-lg  text-2xl bg-sky-700 hover:bg-sky-800 text-white mt-20">
       Enter <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="inline w-5 h-5">
@@ -113,13 +125,16 @@ const Landing = () => {
 </svg>
 
     </button>
-    </div>
     
-    <div className="h-[calc(100vh-460px)]"></div>
+    </div>
+
+
+    <div className="h-[calc(100vh-460px)] sm:h-[calc(100vh-504px)] m:h-[calc(100vh-510px)] lg:h-[calc(100vh-545px)] xl:h-[calc(100vh-545px)] 2xl:h-[calc(100vh-604px)]"></div>
     <NavBar />
       <Home ref={ref} getUserCoordinates={getUserCoordinates} locationError={locationError} lat={lat} long={long}/>
     
     </div>
+    
 </div>
   )
 }

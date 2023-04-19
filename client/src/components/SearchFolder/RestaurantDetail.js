@@ -76,12 +76,13 @@ fetch(`/restaurants`, {
 
 var newnumber = parseInt(restaurantDetail?.rating?.toString().replace('.', ''))
 
-
+const ratingPlaceholder = newnumber ? newnumber : 0
 
 const formErrorMsg = errors?.map((err) => (
   <p key={err}>{err}</p>
   ))
-  const editMsgClassName = updated ? '' : 'hidden';
+
+const editMsgClassName = updated ? '' : 'hidden';
 
 
   return (
@@ -109,7 +110,7 @@ const formErrorMsg = errors?.map((err) => (
         <h2 className="text-center text-2xl pb-4 mt-2 sm:mt-4">{restaurantDetail?.name}</h2>
         <img className=" mx-auto rounded-md w-64 max-h-64 2xl:max-h-fit " src={restaurantDetail?.image_url} alt={restaurantDetail?.name}/>
         <div className="text-center pt-4">
-          <ul >Yelp Rating: <img className="mx-auto" src={`/images/small_${newnumber}.png`} alt={restaurantDetail?.rating}></img></ul>
+          <ul >Yelp Rating: <img className="mx-auto" src={`/images/small_${ratingPlaceholder}.png`} alt={restaurantDetail?.rating}></img></ul>
           <ul className="flex justify-center pt-3">Price Range: {restaurantDetail?.price}</ul>
           <ul className="justify-center">Address: {locationMap}</ul>
           <a href={restaurantDetail?.url} target="_blank" rel="noreferrer">

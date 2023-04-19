@@ -16,6 +16,7 @@ const Home = ({ getUserCoordinates, locationError, lat, long}, ref) => {
      ref={ref}
      >
       <Search locationError={locationError} lat={lat} long={long} />
+      
     </div>
 
   )
