@@ -39,3 +39,214 @@
     transform: rotate(360deg);
   }
 } */
+.text-location {
+  float: right;
+  width: 68%;
+
+}
+.text-1 {
+  animation: text1;
+  
+}
+.text-2 {
+  animation: text2;
+}
+.text-3 {
+  animation: text3;
+}
+.text-4 {
+  animation: text4;
+  
+}
+.text-5 {
+  animation: text5;
+}
+.text-6 {
+  animation: text6;
+}
+.text-7 {
+  animation: text7;
+}
+.text-8 {
+  animation: text8;
+}
+.text-1,
+.text-2,
+.text-3,
+.text-4,
+.text-5,
+.text-6,
+.text-7,
+.text-8
+ {
+
+  vertical-align: top;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  position: relative;
+  animation-duration: 21s;
+  animation-timing-function: steps(13);
+  animation-iteration-count: infinite;
+}
+.text-1::after,
+.text-2::after,
+.text-3::after,
+.text-4::after,
+.text-5::after,
+.text-6::after,
+.text-7::after,
+.text-8::after {
+  content: "|";
+  position: absolute;
+  right: 0;
+  animation: caret infinite;
+  animation-duration: 1s;
+  animation-timing-function: steps(1, end);
+}
+@keyframes text8 {
+  0%,
+  12%,
+  25%,
+  37%,
+  50%,
+  62%,
+  75%,
+  87%,
+  100% {
+    width: 0;
+  }
+  92%,
+  93% {
+    width: 3em;
+  }
+}
+@keyframes text7 {
+  0%,
+  12%,
+  25%,
+  37%,
+  50%,
+  62%,
+  75%,
+  87%,
+  100% {
+    width: 0;
+  }
+  80%,
+  83% {
+    width: 3.5em;
+  }
+}
+@keyframes text6 {
+  0%,
+  12%,
+  25%,
+  37%,
+  50%,
+  62%,
+  75%,
+  87%,
+  100% {
+    width: 0;
+  }
+  69%,
+  70% {
+    width: 3em;
+  }
+}
+@keyframes text5 {
+  0%,
+  12%,
+  25%,
+  37%,
+  50%,
+  62%,
+  75%,
+  87%,
+  100% {
+    width: 0;
+  }
+  58%,
+  59% {
+    width: 2.5em;
+  }
+}
+@keyframes text4 {
+  0%,
+  12%,
+  25%,
+  37%,
+  50%,
+  62%,
+  75%,
+  87%,
+  100% {
+    width: 0;
+  }
+  44%,
+  46% {
+    width: 2.5em;
+  }
+}
+@keyframes text3 {
+  0%,
+  12%,
+  25%,
+  37%,
+  50%,
+  62%,
+  75%,
+  87%,
+  100% {
+    width: 0;
+  }
+  30%,
+  31% {
+    width: 3em;
+  }
+}
+@keyframes text2 {
+  0%,
+  12%,
+  25%,
+  37%,
+  50%,
+  62%,
+  75%,
+  87%,
+  100% {
+    width: 0;
+  }
+  20%,
+  21% {
+    width: 3em;
+  }
+}
+@keyframes text1 {
+  0%,
+  12%,
+  25%,
+  37%,
+  50%,
+  62%,
+  75%,
+  87%,
+  100% {
+    width: 0;
+  }
+  6%,
+  7% {
+    width: 4.5em;
+  }
+}
+@keyframes caret {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}

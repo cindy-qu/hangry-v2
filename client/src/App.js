@@ -1,14 +1,16 @@
 import NavBar from './components/NavBar'
 import Home from './components/Home'
+import Landing from './components/LandingFolder/Landing'
 import About from './components/About'
 import RestaurantDetail from './components/SearchFolder/RestaurantDetail'
 import TryAgain from './components/SearchFolder/TryAgain'
 import './App.css';
 
 import { useState } from 'react';
-import { Routes, Route} from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 function App() {
+ const { pathname } = useLocation();
 
   // grab user geolocation
   const [lat, setLat] = useState(null);
@@ -35,14 +37,15 @@ function App() {
 
   return (
     <div className="font-poppins">
-      <NavBar />
+      { pathname !== '/' && <NavBar />}
       <Routes>
-        <Route path="/about" element={<About />} /> 
-        <Route path="/" element={<Home getUserCoordinates={getUserCoordinates} locationError={locationError} lat={lat} long={long} />} />
+        <Route path='/' element={<Landing />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/search" element={<Home getUserCoordinates={getUserCoordinates} locationError={locationError} lat={lat} long={long} />} />
         <Route path="/restaurants/:id" element={<RestaurantDetail />} />
         <Route path="/tryagain" element={<TryAgain />} />
-      </Routes>  
-                        
+      </Routes>
+
     </div>
   );
 }

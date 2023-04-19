@@ -5,10 +5,10 @@ const NavBar = () => {
   return (
     <div className="bg-purple-background ">
         <div className="flex text-left py-4 text-purple-font">
-            <NavLink className=" font-semibold text-2xl px-4" to="/">
+            <NavLink className=" font-semibold text-2xl px-4" to="/search">
                 Hangry
             </NavLink>
-            <NavLink className="px-2 pt-1" to="/">
+            <NavLink className="px-2 pt-1" to="/search">
                 Search
             </NavLink>
             <NavLink className="px-2 pt-1" to="/myBookmarks">
