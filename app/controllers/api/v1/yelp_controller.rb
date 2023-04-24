@@ -2,6 +2,8 @@ require "json"
 require "optparse"
 
 class Api::V1::YelpController < ApplicationController
+  skip_before_action :authorize
+  
     def search
         rest_cuisine = params[:cuisine]
         rest_latitude = params[:latitude]

@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Search = ({ locationError, lat, long }) => {
 
-
-    const userLocation = [lat, long]
     const [postcode, setPostcode] = useState(null);
     const locationMessage = postcode ? postcode : "Get Location" 
     let navigate = useNavigate()
@@ -190,11 +188,11 @@ const Search = ({ locationError, lat, long }) => {
   return (
     <div className="
      px-10 mx-0
-    sm:py-16 md:py-16 lg:py-20 xl:py-20 2xl:py-20
-    min-w-full 
-    flex 
-    flex-col 
-    text-center">
+     py-10 sm:py-16 md:py-16 lg:py-20 xl:py-20 2xl:py-20
+     min-w-full 
+     flex 
+     flex-col 
+     text-center">
         <p> Get a restaurant based on your location, price range, and category!</p>
 {/*         
         <div className="flex justify-center py-0.5 rounded-md outline outline-1 outline-[#ced4da] mt-3">

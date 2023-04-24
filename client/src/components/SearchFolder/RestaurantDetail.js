@@ -1,14 +1,37 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const RestaurantDetail = () => {
+const RestaurantDetail = ({user}) => {
     const [restaurantDetail, setRestaurantDetail] = useState([]);
     const [bookmarkDetail, setBookmarkDetail] = useState([]);
     const [errors, setErrors] = useState([]);
     const [updated, setUpdated] = useState(false);
 
     const params = useParams();
+    const navigate = useNavigate();
     
+    const [modal, setModal] = useState(false);
+
+    const modalClass = modal ? "fixed z-10 overflow-y-auto top-0 w-full left-0" : "hidden fixed z-10 overflow-y-auto top-0 w-full left-0"
+
+    const modalLogToggle = () => {
+      setModal(false);
+      navigate('/login');
+    }
+    const modalSignToggle = () => {
+      setModal(false);
+      navigate('/signup');
+    }
+    const handleBookmarkClick = () => {
+      if (!user){
+        console.log("hi");
+        setModal(true);
+
+      } else {
+        handleBookmark();
+        console.log("you are a user");
+      }
+    }
 
       useEffect(() => {
         const searchApi = async () => {
@@ -49,7 +72,7 @@ const handleBookmark = (e) => {
 
   const restaurantData = {
     restaurant_name: restaurantDetail.name,
-    // user_id: user.id,
+    user_id: user.id,
     restaurant_image: restaurantDetail.image_url,
     yelp_url: restaurantDetail.url,
   }
@@ -117,8 +140,29 @@ const editMsgClassName = updated ? '' : 'hidden';
           <button className="mt-2 px-3 py-1 rounded-lg bg-sky-700 text-white">Yelp Page</button>
         </a>
         <br></br>
-        <button onClick={handleBookmark} className="mt-2  px-3 py-1 rounded-lg bg-sky-700 text-white" id = "buttonbookmark" >Bookmark for Later</button>
+        <button onClick={handleBookmarkClick} className="mt-2  px-3 py-1 rounded-lg bg-sky-700 text-white" id = "buttonbookmark" >Bookmark for Later</button>
         <ul>{formErrorMsg}</ul>
+
+        <div className={modalClass} id="modal">
+          <div className="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div className="fixed inset-0 transition-opacity">
+              <div className="absolute inset-0 bg-gray-900 opacity-75" />
+            </div>
+            <span className="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+            <div className="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 text-center">
+                <label>Log in or Sign up to Bookmark Restaurants!</label>
+
+              </div>
+              <div className="bg-gray-200 px-4 py-3 text-center">
+                <button type="button" className="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onClick={modalLogToggle}>Log In</button>
+                <button type="button" className="py-2 px-4 bg-sky-700 text-white rounded hover:bg-sky-800 mr-2" onClick={modalSignToggle}>Sign Up</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
             {/* <div id="edit-complete-msg" className={editMsgClassName}>
                       <h3>Bookmarked!</h3>
                       <Link to="/myBookmarks">

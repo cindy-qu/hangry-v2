@@ -5,7 +5,7 @@ import Landing from './LandingFolder/Landing'
 
 const Home = ({ getUserCoordinates, locationError, lat, long}, ref) => {
   return (
-    <div className=" bg-cover bg-bottom   bg-no-repeat  h-[calc(100vh-64px)] overflow-auto w-full bg-[length:65rem] 
+    <div className=" bg-cover bg-bottom   bg-no-repeat  h-[calc(100vh-64px)] overflow-auto w-full bg-[length:64rem] 
      sm:bg-[length:85rem]
      md:bg-[length:100rem] 
      lg:bg-[length:115rem] 
