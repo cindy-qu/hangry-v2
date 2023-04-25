@@ -1,5 +1,5 @@
 import React, { useRef, useState  } from 'react'
-import LandingInfo from "./LandingInfo"
+
 import Home from "../Home"
 import NavBar from "../NavBar"
 

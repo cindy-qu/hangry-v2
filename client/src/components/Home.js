@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react';
 import Search from './SearchFolder/Search';
-import Landing from './LandingFolder/Landing'
 
 
 const Home = ({ getUserCoordinates, locationError, lat, long}, ref) => {

@@ -11,7 +11,7 @@ const TryAgain = () => {
         <Link to="/">  
             <button className="mt-3 px-3 py-1 rounded-md bg-sky-700 hover:bg-sky-800 text-white ">Search Again</button>
         </Link>
-        <img className="mx-auto 2xl:w-6/12 xl:w-6/12 lg:w-5/12 md:w-5/12 sm:w-5/12 xs:w-4/12 " src={tryagain}></img>
+        <img className="mx-auto 2xl:w-6/12 xl:w-6/12 lg:w-5/12 md:w-5/12 sm:w-5/12 xs:w-4/12 " src={tryagain} alt="tryagain"></img>
 
     </div>
   )

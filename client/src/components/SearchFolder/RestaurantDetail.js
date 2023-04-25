@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 
 const RestaurantDetail = ({user}) => {
     const [restaurantDetail, setRestaurantDetail] = useState([]);
@@ -24,12 +24,10 @@ const RestaurantDetail = ({user}) => {
     }
     const handleBookmarkClick = () => {
       if (!user){
-        console.log("hi");
         setModal(true);
 
       } else {
         handleBookmark();
-        console.log("you are a user");
       }
     }
 
@@ -163,13 +161,13 @@ const editMsgClassName = updated ? '' : 'hidden';
         </div>
 
 
-            {/* <div id="edit-complete-msg" className={editMsgClassName}>
+            <div id="edit-complete-msg" className={editMsgClassName}>
                       <h3>Bookmarked!</h3>
                       <Link to="/myBookmarks">
-                        <button className="btn btn-primary">View My Bookmarks
+                        <button className="py-2 px-4 bg-sky-700 text-white rounded hover:bg-sky-800 mr-2">View My Bookmarks
                         </button>
                       </Link>
-              </div> */}
+              </div>
         </div>
       </div>
     </div>

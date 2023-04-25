@@ -21,9 +21,11 @@ const BookmarkList = ( {restaurantBookmarks2, restaurantBookmarks, bookmarks, se
    
    })
   return (
-    <div className ="row" id="bookmarkcard">
-        {/* <h1>BookmarkList</h1> */}
+    <div className="mx-8 xs:mx-10 my-8 ">
+        <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 
+        md:gap-1 lg:gap-2 xl:gap-2 2xl:gap-2">
         {renderBookmarkCard}
+        </div>
     </div>
   )
 }
