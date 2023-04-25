@@ -1,7 +1,7 @@
 require "json"
 require "optparse"
 
-class Api::V1::YelpController < ApplicationController
+class YelpController < ApplicationController
   skip_before_action :authorize
   
     def search
@@ -18,7 +18,7 @@ class Api::V1::YelpController < ApplicationController
           render json: results
     end
 
-    def restaurants
+    def restaurantsDetail
         rest_yelpId = params[:yelpID]
         response = RestClient::Request.execute(
           method: "GET",

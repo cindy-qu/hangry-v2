@@ -59,7 +59,7 @@ const Search = ({ locationError, lat, long }) => {
     async function fetchRestaurant (cuisine, lat, long, price)  {
          setLoading(true)
          const data = {cuisine: cuisine, latitude: lat, longitude: long, price: price}
-            let response = await fetch("http://localhost:3000/api/v1/search", {
+            let response = await fetch("http://localhost:3000/search", {
             method: "POST",
             headers:{
                 'Accept': 'application/json',
@@ -101,7 +101,7 @@ const Search = ({ locationError, lat, long }) => {
     async function fetchAdventureRestaurant ( lat, long)  {
         setLoadingAdventure(true)
         const data = {cuisine: 'cuisine', latitude: lat, longitude: long, price: generateRandomPrice()}
-           let response = await fetch("http://localhost:3000/api/v1/search", {
+           let response = await fetch("http://localhost:3000/search", {
            method: "POST",
            headers:{
                'Accept': 'application/json',

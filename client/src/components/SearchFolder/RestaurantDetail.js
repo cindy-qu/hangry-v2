@@ -34,7 +34,7 @@ const RestaurantDetail = ({user}) => {
       useEffect(() => {
         const searchApi = async () => {
         const data = {yelpID: params.id}
-        fetch("http://localhost:3000/api/v1/restaurants", {
+        fetch("http://localhost:3000/restaurantsDetail", {
             method: "POST",
             headers:{
                 'Accept': 'application/json',
