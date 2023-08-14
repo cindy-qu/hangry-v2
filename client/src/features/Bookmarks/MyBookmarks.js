@@ -1,25 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import LoginContainer from '../LoginFolder/LoginContainer';
+import LoginContainer from '../../components/auth/LoginContainer';
 import BookmarkList from './BookmarkList';
 
 const MyBookmarks = ( { user, setUser, restaurantBookmarks, setUpdateAfterBookmark } ) => {
-
-// // user information
-//   const [user, setUser] = useState(null)
-
-// // automatically login if user_id is in session, load home page
-//   useEffect(() => {
-//     fetch("/me").then((res) => {
-//       if (res.ok) {
-//         res.json().then((userData) => {
-//           setUser(userData)
-  
-//         });
-//       }
-//     });
-//   }, [])
-  
-
 
 
   const [user2, setUser2] = useState(null)

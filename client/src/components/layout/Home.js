@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import Search from './SearchFolder/Search';
+import Search from '../../features/Search/Search';
 
 
 const Home = ({ getUserCoordinates, locationError, lat, long}, ref) => {
@@ -10,7 +10,7 @@ const Home = ({ getUserCoordinates, locationError, lat, long}, ref) => {
      lg:bg-[length:115rem] 
      xl:bg-[length:130rem] 
      2xl:bg-[length:135rem]
-     bg-[url('./ImagesFolder/8505.jpg')] 
+     bg-[url('./assets/8505.jpg')] 
      "
      ref={ref}
      >

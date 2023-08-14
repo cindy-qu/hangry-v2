@@ -113,7 +113,7 @@ const editMsgClassName = updated ? '' : 'hidden';
     lg:bg-[length:115rem] 
     xl:bg-[length:130rem] 
     2xl:bg-[length:120rem]
-    sm:bg-[url('./ImagesFolder/restaurantimg.jpg')] 
+    sm:bg-[url('./assets/restaurantimg.jpg')] 
     ">
       <div className="my-4 sm:my-8 
                       pb-4 sm:pb-8 
