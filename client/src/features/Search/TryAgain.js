@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import tryagain from '../../ImagesFolder/tryagain.jpg'
+import tryagain from '../../assets/tryagain.jpg'
 
 const TryAgain = () => {
   return (

@@ -1,15 +1,15 @@
-import NavBar from './components/NavBar';
-import Home from './components/Home';
-import Landing from './components/LandingFolder/Landing';
-import About from './components/About';
-import RestaurantDetail from './components/SearchFolder/RestaurantDetail';
-import TryAgain from './components/SearchFolder/TryAgain';
-import MyBookmarks from './components/MyBookmarksFolder/MyBookmarks';
-import AddBookmarkNote from  './components/MyBookmarksFolder/AddBookmarkNote';
-import EditBookmarkCard from './components/MyBookmarksFolder/EditBookmarkCard';
-import LoginContainer from './components/LoginFolder/LoginContainer';
-import Signup from './components/LoginFolder/Signup';
-import Calendar from './components/CalendarFolder/Calendar'
+import NavBar from './components/layout/NavBar';
+import Home from './components/layout/Home';
+import Landing from './features/Landing/Landing';
+import About from './components/layout/About';
+import RestaurantDetail from './features/Search/RestaurantDetail';
+import TryAgain from './features/Search/TryAgain';
+import MyBookmarks from './features/Bookmarks/MyBookmarks';
+import AddBookmarkNote from  './features/Bookmarks/AddBookmarkNote';
+import EditBookmarkCard from './features/Bookmarks/EditBookmarkCard';
+import LoginContainer from './components/auth/LoginContainer';
+import Signup from './components/auth/Signup';
+import Calendar from './features/Calendar/Calendar'
 
 import './App.css';
 

@@ -1,7 +1,7 @@
 import React, { useRef, useState  } from 'react'
 
-import Home from "../Home"
-import NavBar from "../NavBar"
+import Home from "../../components/layout/Home"
+import NavBar from "../../components/layout/NavBar"
 
 const Landing = () => {
   const [lat, setLat] = useState(null);
@@ -47,39 +47,7 @@ const Landing = () => {
     }
   }
   return (
-    // <div className="opacity-50  bg-cover bg-bottom   bg-no-repeat  h-[calc(100vh-64px)] overflow-auto w-full bg-[length:70rem] 
-    // sm:bg-[length:85rem]
-    // md:bg-[length:100rem] 
-    // lg:bg-[length:115rem] 
-    // xl:bg-[length:130rem] 
-    // 2xl:bg-[length:135rem]
-    // bg-[url('./ImagesFolder/ali-inay-y3aP9oo9Pjc-unsplash.jpg')] 
-    // ">
-
-
-  //   <div style={styles.header}>
-  //   <div style={styles.content} >
-  //     <h1 className="font-nunito text-9xl font-black text-dark-color pt-20 pl-20">Hangry</h1>
-  //     <h2 className="font-nunito text-4xl font-bold text-dark-color pt-10 pl-20" >Can't decide where to get ...
-  //               <span className="text-1">breakfast</span>
-  //               <span className="text-2">lunch</span>
-  //               <span className="text-3">dinner</span>  
-  //               <span className="text-4">tacos</span>  
-  //               <span className="text-5">sushi</span>  
-  //               <span className="text-6">pizza</span>
-  //               <span className="text-7">sandwiches</span>  
-  //               <span className="text-8">ramen</span>   
-
-  //     </h2>
-  //     <h2 className="font-nunito text-4xl font-bold text-dark-color pt-10 pl-20">Let Hangry decide for you!</h2>
-  //     <button onClick = {handleClick} className="font-nunito px-3 py-1 rounded-lg  text-4xl bg-sky-700 hover:bg-sky-800 text-white ml-20 mt-10">Enter </button>
-  //     <div className="h-[calc(100vh-456px)]"></div>
-  //     <NavBar />
-  //       <Home ref={ref} getUserCoordinates={getUserCoordinates} locationError={locationError} lat={lat} long={long}/>
-      
-  //     </div>
-  // </div>
-  
+    
   <div style={styles.header}>
   <div style={styles.content} >
     

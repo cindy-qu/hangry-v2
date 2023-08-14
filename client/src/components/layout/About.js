@@ -10,7 +10,7 @@ const About = () => {
     lg:bg-[length:70rem] 
     xl:bg-[length:75rem] 
     2xl:bg-[length:80rem]
-    bg-[url('./ImagesFolder/about.jpg')] 
+    bg-[url('./assets/about.jpg')] 
     ">
       <div className="text-center
                       my-4 sm:my-10
