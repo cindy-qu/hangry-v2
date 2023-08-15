@@ -13,52 +13,60 @@ import Calendar from './features/Calendar/Calendar'
 
 import './App.css';
 
+import { useDispatch, useSelector } from 'react-redux'; 
+import { setLat, setLong, setLocationError } from './store/location';
+import { setUser } from './store/user';
+import { setUpdateAfterDelete, setUpdateBookmarkCard, setUpdateBookmarkNote, setUpdateAfterBookmark } from './store/update';
 import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
 function App() {
-  const [updateAfterDelete, setUpdateAfterDelete] = useState(false)
-  const [updateBookmarkCard, setUpdateBookmarkCard] = useState([])
-  const [updateBookmarkNote, setUpdateBookmarkNote] = useState([])
-  const [updateAfterBookmark, setUpdateAfterBookmark] = useState([])
-  const [restaurantBookmarks, setRestaurantBookmarks]=useState([])
+  const { lat } = useSelector(state => state.geoLocation);
+  const { long } = useSelector(state => state.geoLocation);
+  const { locationError } = useSelector(state => state.geoLocation);
+
+  const { user } = useSelector(state => state.userInfo);
+
+  const { updateAfterDelete } = useSelector(state => state.update);
+  const { updateBookmarkCard } = useSelector(state => state.update);
+  const { updateBookmarkNote } = useSelector(state => state.update);
+  const { updateAfterBookmark } = useSelector(state => state.update);
+
+  const [restaurantBookmarks, setRestaurantBookmarks]=useState([]);
+
+  const dispatch = useDispatch();
   
   const [errors, setErrors] = useState([])
 
   // for scrolling from landing page to search page
- const { pathname } = useLocation();
+  const { pathname } = useLocation();
 
-  // grab user geolocation
-  const [lat, setLat] = useState(null);
-  const [long, setLong] = useState(null);
-  const [locationError, setLocationError] = useState([]);
 
   // geolocation API
   const geolocationAPI = navigator.geolocation;
   const getUserCoordinates = () => {
     if (!geolocationAPI) {
-      setLocationError("Geolocation is not enabled!")
+      dispatch(setLocationError("Geolocation is not enabled!"))
+      console.log(locationError)
     } else {
       geolocationAPI.getCurrentPosition((position) => {
         const { coords } = position;
-        setLat(coords.latitude);
-        setLong(coords.longitude);
+        dispatch(setLat(coords.latitude))
+        dispatch(setLong(coords.longitude))
       }, (error) => {
-        setLocationError("Sorry, something went wrong getting your location")
+        dispatch(setLocationError("Sorry, something went wrong getting your location"));
       })
     }
   }
   getUserCoordinates();
 
-// user information
-  const [user, setUser] = useState(null)
 
 // automatically login if user_id is in session, load home page
 useEffect(() => {
   fetch("/me").then((res) => {
     if (res.ok) {
       res.json().then((userData) => {
-        setUser(userData);
+        dispatch(setUser(userData));
         fetchRestaurantBookmarks();
       });
     }
@@ -76,18 +84,19 @@ const fetchRestaurantBookmarks = () => {
   })
 }
 
-
-
   return (
     <div className="font-poppins">
       { pathname !== '/' && <NavBar user={user} setUser={setUser} />}
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path="/about" element={<About />} />
+
         <Route path="/search" element={<Home getUserCoordinates={getUserCoordinates} locationError={locationError} lat={lat} long={long}/>} />
         <Route path="/restaurants/:id" element={<RestaurantDetail user={user} />} />
         <Route path="/tryagain" element={<TryAgain />} />
+
         <Route path="/myBookmarks" element={<MyBookmarks user={user} setUser={setUser} setUpdateAfterBookmark={setUpdateAfterBookmark} restaurantBookmarks={restaurantBookmarks} setUpdateAfterDelete={setUpdateAfterDelete}/>} />
+        
         <Route path="/login" element={<LoginContainer setUser={setUser} />} />
         <Route path="/signup" element={<Signup setUser={setUser} />} />
 
