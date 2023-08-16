@@ -20,7 +20,7 @@ const LoginContainer = ({ setUser }) => {
       if (res.ok) {
         res.json().then((userLogin) => {
           setUser(userLogin);
-          navigate("/myBookmarks");
+          navigate("/search");
         });
       } else {
         res.json().then((err) => setErrors(err.errors));

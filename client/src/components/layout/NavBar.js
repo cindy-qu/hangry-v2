@@ -1,8 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../store/user";
 
-const NavBar = ({ user, setUser }) => {
+const NavBar = ({ setLoginUpdate }) => {
+
+  const { user } = useSelector((state) => state.userInfo);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetch("/me").then((res) => {
+      if (res.ok) {
+        res.json().then((userData) => {
+          dispatch(setUser(userData));
+          setLoginUpdate(userData);
+        });
+      }
+    });
+  }, []);
+
+
   const [isNavOpen, setIsNavOpen] = useState(false);
+
   const navVisible = isNavOpen
     ? "w-full md:block md:w-auto"
     : "hidden w-full md:block md:w-auto";
@@ -23,7 +42,7 @@ const NavBar = ({ user, setUser }) => {
   const handleSignUser = (e) => {
     navigate("/login");
   };
-
+  
   const logOut = !user ? (
     <button
       className="px-3 py-1 rounded-md bg-sky-700 hover:bg-sky-800 text-white inline-flex items-center"
@@ -106,9 +125,6 @@ const NavBar = ({ user, setUser }) => {
                 About
               </NavLink>
             </li>
-            {/* <li>
-          <a href="/" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Profile</a>
-        </li> */}
             <li>{logOut}</li>
           </ul>
         </div>

@@ -21,6 +21,7 @@ import {
   setUpdateBookmarkCard,
   setUpdateBookmarkNote,
   setUpdateAfterBookmark,
+  setLoginUpdate,
 } from "./store/update";
 import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
@@ -36,6 +37,7 @@ function App() {
   const { updateBookmarkCard } = useSelector((state) => state.update);
   const { updateBookmarkNote } = useSelector((state) => state.update);
   const { updateAfterBookmark } = useSelector((state) => state.update);
+  const { loginUpdate } = useSelector((state) => state.update);
 
   const [restaurantBookmarks, setRestaurantBookmarks] = useState([]);
 
@@ -86,6 +88,7 @@ function App() {
     updateBookmarkNote,
     updateBookmarkCard,
     updateAfterDelete,
+    loginUpdate,
   ]);
 
   const fetchRestaurantBookmarks = () => {
@@ -100,7 +103,7 @@ function App() {
 
   return (
     <div className="font-poppins">
-      {pathname !== "/" && <NavBar user={user} setUser={setUser} />}
+      {pathname !== "/" && <NavBar setLoginUpdate={setLoginUpdate} />}
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/about" element={<About />} />

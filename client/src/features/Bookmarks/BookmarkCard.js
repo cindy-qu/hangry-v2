@@ -17,12 +17,9 @@ const BookmarkCard = ({
     }).then(setUpdateAfterDelete);
   }
 
-  // const showAddButton = personal_note?.personal_note.length > 0 ? "hidden" : ""
-  // const showEditButton = personal_note?.personal_note.length > 0 ? "" : "hidden"
   const apostId = restaurant_name.split(" ").join("");
   const andhover = apostId.replace("&", "A");
   const idhover = andhover.replace("'", "A");
-  // const newidhover = `#${idhover}`
 
   const linkAddEdit =
     personal_note?.personal_note.length > 0
@@ -30,7 +27,6 @@ const BookmarkCard = ({
       : `addNote/${bookmark_id}`;
   const showAddEddit =
     personal_note?.personal_note.length > 0 ? "Edit Note" : "Add Note";
-  // const showIcon =  personal_note?.personal_note.length > 0 ? "/images/pencil.png" : "/images/add.png"
   const fontAwesome =
     personal_note?.personal_note.length > 0
       ? "fa-regular fa-pen-to-square"
@@ -103,22 +99,18 @@ const BookmarkCard = ({
           </Link>
         </h5>
 
-        <a href={yelp_url} target="_blank" rel="noreferrer">
-          <button
-            className="ml-3 mr-3 px-3 py-1 rounded-md bg-sky-700 hover:bg-sky-800 text-white"
-            id="yelp-CSS"
-          >
-            <img
-              src="/images/yelp.png"
-              className="inline w-4 h-4"
-              alt="/images/yelp.png"
-            ></img>
-            Yelp Page{" "}
-          </button>
-        </a>
-        {/* <Link to={`/createEvent/${bookmark_id}`}>
-          <button className="ml-3 mr-3 px-3 py-1 rounded-md bg-sky-700 hover:bg-sky-800 text-white"><img className="inline w-4 h-4" src="/images/google-calendar.png" alt="google-calendar"></img>Create Event</button>
-        </Link> */}
+        <div className="flex justify-center gap-1">
+          <a href={yelp_url} target="_blank" rel="noreferrer">
+            <button className=" px-3 py-1 rounded-md bg-sky-700 hover:bg-sky-800 text-white" id="yelp-CSS">
+              <img src="/images/yelp.png" className="inline w-4 h-4" alt="/images/yelp.png"></img>Yelp Page 
+            </button>
+          </a>
+          <Link to={`/createEvent/${bookmark_id}`}>
+            <button className=" px-3 py-1 rounded-md bg-sky-700 hover:bg-sky-800 text-white">
+              <img className="inline w-4 h-4" src="/images/google-calendar.png" alt="google-calendar"></img>Create Event
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

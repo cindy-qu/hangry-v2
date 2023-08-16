@@ -7,6 +7,7 @@ export const updateSlice = createSlice({
     updateBookmarkCard: [],
     updateBookmarkNote: [],
     updateAfterBookmark: [],
+    loginUpdate: [],
   },
   reducers: {
     setUser: (state, action) => {
@@ -20,6 +21,7 @@ export const {
   setUpdateBookmarkCard,
   setUpdateBookmarkNote,
   setUpdateAfterBookmark,
+  setLoginUpdate,
 } = updateSlice.actions;
 
 export default updateSlice.reducer;

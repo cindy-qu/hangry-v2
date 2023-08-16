@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setCuisine, setPrice } from "../../store/searchParams";
 
 const Search = ({ locationError, lat, long }) => {
   const [postcode, setPostcode] = useState(null);
   const locationMessage = postcode ? postcode : "Get Location";
   let navigate = useNavigate();
 
-  const [cuisine, setCuisine] = useState("");
-  const [price, setPrice] = useState("1");
-  // const [dataYelp, setDataYelp] = useState('')
+  const dispatch = useDispatch();
+  const { cuisine } = useSelector((state) => state.searchParams);
+  const { price } = useSelector((state) => state.searchParams);
+
   const [loading, setLoading] = useState(false);
   const loadClassSearch = !loading ? (
     <p>Search</p>
@@ -62,26 +65,11 @@ const Search = ({ locationError, lat, long }) => {
   );
 
   const handleCuisine = (e) => {
-    setCuisine(e.target.value);
+    dispatch(setCuisine(e.target.value));
   };
-
   const handlePrice = (e) => {
-    setPrice(e.target.value);
+    dispatch(setPrice(e.target.value));
   };
-  // const handleLocation = (e) => {
-  //     setLocation(e.target.value)
-  //  }
-
-  // const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     setRedirect(true)
-  //     // this.props.dispatch({ type: "SEARCH_LOC", payload: this.state.location })
-  //     // this.props.dispatch({ type: "SEARCH_CUISINE", payload: this.state.cuisine })
-  //     // this.setState({ location: "", cuisine: "" });
-  //     // console.log("cuisine", this.state.cuisine)
-  //     // console.log("location", this.state.location)
-  //     handleClick(cuisine, lat, long)
-  // }
 
   async function fetchRestaurant(cuisine, lat, long, price) {
     setLoading(true);
@@ -91,6 +79,7 @@ const Search = ({ locationError, lat, long }) => {
       longitude: long,
       price: price,
     };
+    console.log(data)
     let response = await fetch("https://hangryv2.onrender.com/search", {
       method: "POST",
       headers: {
@@ -99,32 +88,9 @@ const Search = ({ locationError, lat, long }) => {
       },
       body: JSON.stringify(data),
     });
-    // .then((res)=> {setLoading(false)})
 
     let responseJson = await response.json();
     return responseJson.businesses;
-    // .then(res => res.json()
-    // .then((info) => { setDataYelp(info.businesses)}
-    // ))
-
-    // .then(console.log(dataYelp,lat,long))
-    // return  dataYelp
-
-    // const data = {cuisine: cuisine, location: location };
-    // console.log(data)
-    // return fetch("http://localhost:3000/api/v1/search", {
-    // method: "POST",
-    // mode: 'no-cors',
-    // headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json',
-    // },
-    // body: JSON.stringify(data),
-    // })
-
-    // .then(res => res.json())
-    // .then(data => console.log("Printing data: ", data));
-    // // .then(results => this.props.dispatch({ type: "SEARCH_RESULTS", payload: results }))
   }
   function generateRandomPrice(min = 1, max = 4) {
     return (Math.floor(Math.random() * (max - min)) + min).toString();
@@ -162,22 +128,6 @@ const Search = ({ locationError, lat, long }) => {
     setPostcode(data?.address?.postcode);
   }
 
-  //    useEffect(() => {
-  //     fetch(`
-  //     https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${long}&zoom=18&addressdetails=1
-  //     `)
-  //     .then(res => res.json())
-  //     .then(data => {
-  //         setFullRecipe(data?.address?.postcode)
-  //     })
-  //     .catch(
-  //         (error) => {
-  // console.log(error)
-  //         }
-  //       )
-  //   },[])
-
-  // console.log(fullRecipe)
   const handleClick = async (e) => {
     e.preventDefault();
     const restaurantArray = await fetchRestaurant(cuisine, lat, long, price);
