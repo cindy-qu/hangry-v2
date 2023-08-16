@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setCuisine, setPrice } from "../../store/searchParams";
+import { setCuisine, setPrice, setDistance } from "../../store/searchParams";
 
 const Search = ({ locationError, lat, long }) => {
   const [postcode, setPostcode] = useState(null);
@@ -11,6 +11,7 @@ const Search = ({ locationError, lat, long }) => {
   const dispatch = useDispatch();
   const { cuisine } = useSelector((state) => state.searchParams);
   const { price } = useSelector((state) => state.searchParams);
+  const { distance } = useSelector((state) => state.searchParams);
 
   const [loading, setLoading] = useState(false);
   const loadClassSearch = !loading ? (
@@ -70,14 +71,18 @@ const Search = ({ locationError, lat, long }) => {
   const handlePrice = (e) => {
     dispatch(setPrice(e.target.value));
   };
+  const handleDistance = (e) => {
+    dispatch(setDistance(e.target.value));
+  };
 
-  async function fetchRestaurant(cuisine, lat, long, price) {
+  async function fetchRestaurant(cuisine, lat, long, price, distance) {
     setLoading(true);
     const data = {
       cuisine: cuisine,
       latitude: lat,
       longitude: long,
       price: price,
+      distance: distance,
     };
     console.log(data)
     let response = await fetch("https://hangryv2.onrender.com/search", {
@@ -183,16 +188,8 @@ const Search = ({ locationError, lat, long }) => {
      text-center"
     >
       <p>
-        {" "}
         Get a restaurant based on your location, price range, and category!
       </p>
-      {/*         
-        <div className="flex justify-center py-0.5 rounded-md outline outline-1 outline-[#ced4da] mt-3">
-            <svg width="20px" height="20px" viewBox="-1.5 0 15 15" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#ced4da" fillRule="evenodd" d="M574,120 C575.324428,120 580,114.054994 580,110.833333 C580,107.611672 577.313708,105 574,105 C570.686292,105 568,107.611672 568,110.833333 C568,114.054994 572.675572,120 574,120 Z M574,113.333333 C575.420161,113.333333 576.571429,112.214045 576.571429,110.833333 C576.571429,109.452621 575.420161,108.333333 574,108.333333 C572.579839,108.333333 571.428571,109.452621 571.428571,110.833333 C571.428571,112.214045 572.579839,113.333333 574,113.333333 Z" transform="translate(-568 -105)"/>
-            </svg>
-            <input  type="text"placeholder={userLocation} disabled/>
-        </div> */}
 
       <div className="px-3 flex justify-center mt-2">
         <form onSubmit={handleClick}>
@@ -215,6 +212,17 @@ const Search = ({ locationError, lat, long }) => {
             </svg>
             <input type="text" placeholder={locationMessage} disabled />
           </div>
+          <select
+            className="py-0.5 rounded-md outline outline-1 outline-[#ced4da]"
+            value={distance}
+            onChange={handleDistance}
+            required
+          >
+            <option value="1"> 1 mi</option>
+            <option value="2">2 mi</option>
+            <option value="5">5 mi</option>
+            <option value="10">10 mi</option>
+          </select>
           <select
             className="py-0.5 rounded-md outline outline-1 outline-[#ced4da]"
             value={price}
