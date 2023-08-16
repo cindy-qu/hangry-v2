@@ -1,10 +1,10 @@
-import React, { forwardRef } from 'react';
-import Search from '../../features/Search/Search';
+import React, { forwardRef } from "react";
+import Search from "../../features/Search/Search";
 
-
-const Home = ({ getUserCoordinates, locationError, lat, long}, ref) => {
+const Home = ({ getUserCoordinates, locationError, lat, long }, ref) => {
   return (
-    <div className=" bg-cover bg-bottom   bg-no-repeat  h-[calc(100vh-64px)] overflow-auto w-full bg-[length:64rem] 
+    <div
+      className=" bg-cover bg-bottom   bg-no-repeat  h-[calc(100vh-64px)] overflow-auto w-full bg-[length:64rem] 
      sm:bg-[length:85rem]
      md:bg-[length:100rem] 
      lg:bg-[length:115rem] 
@@ -12,13 +12,11 @@ const Home = ({ getUserCoordinates, locationError, lat, long}, ref) => {
      2xl:bg-[length:135rem]
      bg-[url('./assets/8505.jpg')] 
      "
-     ref={ref}
-     >
+      ref={ref}
+    >
       <Search locationError={locationError} lat={lat} long={long} />
-      
     </div>
-
-  )
-}
+  );
+};
 
 export default forwardRef(Home);

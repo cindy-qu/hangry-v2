@@ -103,6 +103,7 @@ useEffect(() => {
                   request.execute(event => {
                     // console.log(event)
                     window.open(event.htmlLink)
+                    console.log(event.htmlLink)
                   })
 
             })
@@ -112,22 +113,28 @@ useEffect(() => {
     const editCalendarEvent = updated ? '' : 'hidden';
 // console.log((new Date(new Date().toString().split('GMT')[0]+' UTC').toISOString().split('.')[0]))
   return (
-    <div className="calendarpage">
-        <h1>Create Event</h1>
-        <form className="mb-3" onSubmit={handleSubmitEvent}>
+    <div className="bg-cover bg-bottom   bg-no-repeat  h-[calc(100vh-64px)] overflow-auto w-full bg-[length:60rem] 
+    sm:bg-[length:60rem]
+    md:bg-[length:65rem] 
+    lg:bg-[length:70rem] 
+    xl:bg-[length:70rem] 
+    2xl:bg-[length:75rem]
+    bg-[url('./assets/calendar.jpg')] ">
+        <h1 className="text-center text-3xl mt-1 mb-5">Create Event</h1>
+        <form className="mb-3 text-center" onSubmit={handleSubmitEvent}>
             
-            <label className="form-label">Restaurant</label>
-            <input className="form-control"
+            <label className="mr-2">Restaurant</label>
+            <input className="pl-1 bg-white rounded-md outline outline-1 outline-[#ced4da]"
                 id="restaurant_name"
                 type="text"
-
+                disabled
                 value={updateRestaurantName}
                 onChange={setUpdateRestaurantName}
                 required/>
             <br></br>
 
-            <label className="form-label">Start</label>
-            <input className="form-control" 
+            <label className="mr-2">Start</label>
+            <input className="pl-1 mt-3 bg-white rounded-md outline outline-1 outline-[#ced4da]" 
                 type="datetime-local" 
                 id="restaurant_start" 
                 value={restaurantStart} 
@@ -135,8 +142,8 @@ useEffect(() => {
                 min = "2022-12-05T00:00:00"
                 required/>
             <br></br>
-            <label className="form-label">End</label>
-            <input className="form-control" 
+            <label className="mr-2 ">End</label>
+            <input className="pl-1 mt-3 bg-white rounded-md outline outline-1 outline-[#ced4da]" 
                 type="datetime-local" 
                 id="restaurant_end" 
                 value={restaurantEnd} 
@@ -145,8 +152,8 @@ useEffect(() => {
                 required/>
             
             <br></br>
-            <label className="form-label">Timezone</label>
-            <select className="form-select" name="timezone" id="restaurant_start" value={restaurantTimezone} onChange={handleRestaurantTimezone} required>
+            <label className="mr-2">Timezone</label>
+            <select className="pl-1 mt-3 mb-3 bg-white rounded-md outline outline-1 outline-[#ced4da]" name="timezone" id="restaurant_start" value={restaurantTimezone} onChange={handleRestaurantTimezone} required>
                 <option></option>
                 <option value="Etc/GMT+12">(GMT-12:00) International Date Line West</option>
                 <option value="Pacific/Midway">(GMT-11:00) Midway Island, Samoa</option>
@@ -233,11 +240,11 @@ useEffect(() => {
             </select>
            
             <br></br>
-            <button className="btn btn-primary" id="event-button"  type="submit">Create Event</button>
+            <button className="py-2 px-4 bg-sky-700 text-white rounded hover:bg-sky-800 mr-2" id="event-button"  type="submit">Create Event</button>
             <div id="calendar-complete-msg" className={editCalendarEvent}>
                 <h3>Event added!</h3>
                 <Link to="/myBookmarks">
-                  <button className="btn btn-success">View My Bookmarks
+                  <button className="py-2 px-4 bg-sky-700 text-white rounded hover:bg-sky-800 mr-2">View My Bookmarks
                   </button>
                 </Link>
         </div>

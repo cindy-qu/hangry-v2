@@ -42,11 +42,9 @@
 .text-location {
   float: right;
   width: 68%;
-
 }
 .text-1 {
   animation: text1;
-  
 }
 .text-2 {
   animation: text2;
@@ -56,7 +54,6 @@
 }
 .text-4 {
   animation: text4;
-  
 }
 .text-5 {
   animation: text5;
@@ -77,9 +74,7 @@
 .text-5,
 .text-6,
 .text-7,
-.text-8
- {
-
+.text-8 {
   vertical-align: top;
   text-align: left;
   overflow: hidden;
@@ -250,4 +245,3 @@
     opacity: 1;
   }
 }
-
