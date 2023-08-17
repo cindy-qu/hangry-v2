@@ -61,7 +61,7 @@ const NavBar = ({ setLoginUpdate }) => {
 
   return (
     <div className="border-gray-200 bg-purple-background dark:bg-gray-800 dark:border-gray-700 text-purple-font">
-      <div className="max-w-screen-2xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <div className="max-w-[1400px] flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="/search" className="flex items-center">
           <svg
             fill="#365ca4"
