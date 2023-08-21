@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setCuisine, setPrice } from "../../store/searchParams";
+import { setCuisine, setPrice, setRadius } from "../../store/searchParams";
 
 //loading icon import
 import { Ring } from '@uiball/loaders'
@@ -14,7 +14,8 @@ const Search = ({ locationError, lat, long }) => {
   const dispatch = useDispatch();
   const { cuisine } = useSelector((state) => state.searchParams);
   const { price } = useSelector((state) => state.searchParams);
-  const [radius, setRadius] = useState("10")
+  const { radius } = useSelector((state) => state.searchParams);
+
   const [options, setOptions] = useState(false)
   const [loading, setLoading] = useState(false);
   const loadClassSearch = !loading ? (
@@ -64,7 +65,7 @@ const Search = ({ locationError, lat, long }) => {
   };
 
   const handleRadius = (e) => {
-    setRadius(e.target.value)
+    dispatch(setRadius(e.target.value))
 }
 const handleOptions = () => {
     setOptions(prevState => {
@@ -194,20 +195,12 @@ const handleOptions = () => {
             <div className="row-start-2 text-left pt-6">
                 <p className="text-2xl font-semibold">Get a restaurant based on your location, price range, and category!</p>
             </div>
-    {/*         
-            <div className="flex justify-center py-0.5 rounded-md outline outline-1 outline-[#ced4da] mt-3">
-                <svg width="20px" height="20px" viewBox="-1.5 0 15 15" xmlns="http://www.w3.org/2000/svg">
-                    <path fill="#ced4da" fillRule="evenodd" d="M574,120 C575.324428,120 580,114.054994 580,110.833333 C580,107.611672 577.313708,105 574,105 C570.686292,105 568,107.611672 568,110.833333 C568,114.054994 572.675572,120 574,120 Z M574,113.333333 C575.420161,113.333333 576.571429,112.214045 576.571429,110.833333 C576.571429,109.452621 575.420161,108.333333 574,108.333333 C572.579839,108.333333 571.428571,109.452621 571.428571,110.833333 C571.428571,112.214045 572.579839,113.333333 574,113.333333 Z" transform="translate(-568 -105)"/>
-                </svg>
-                <input  type="text"placeholder={userLocation} disabled/>
-            </div> */}
+
             <div className="row-start-3 flex flex-col">
                 <div className = "row-start-3">
                     <form className=" grid grid-cols-9" onSubmit={handleClick}>
                     <div onClick={handleLocation} className="h-10 p-2 object-left col-start-1 col-end-5 bg-white rounded-l-lg outline outline-1 outline-[#ced4da]">
-                        {/* <svg width="20px" height="20px" viewBox="-1.5 0 15 15" xmlns="http://www.w3.org/2000/svg">
-                            <path fill="#ced4da" fillRule="evenodd" d="M574,120 C575.324428,120 580,114.054994 580,110.833333 C580,107.611672 577.313708,105 574,105 C570.686292,105 568,107.611672 568,110.833333 C568,114.054994 572.675572,120 574,120 Z M574,113.333333 C575.420161,113.333333 576.571429,112.214045 576.571429,110.833333 C576.571429,109.452621 575.420161,108.333333 574,108.333333 C572.579839,108.333333 571.428571,109.452621 571.428571,110.833333 C571.428571,112.214045 572.579839,113.333333 574,113.333333 Z" transform="translate(-568 -105)"/>
-                        </svg> */}
+
                         <input type="text" placeholder={locationMessage} disabled/>
                     </div>
                         <input className="h-10 p-2 col-start-5 col-end-9 outline outline-1 outline-[#ced4da]" type="text" name="food" onChange={handleCuisine} placeholder="Which type of cuisine?" autoComplete = "off" required/>
@@ -231,7 +224,7 @@ const handleOptions = () => {
                         <option value="3">$$$</option>
                         <option value="4">$$$$</option>
                     </select>
-                    <select className="h-7 px-2 mx-2 rounded-md outline outline-1 outline-[#ced4da]" value={price} onChange={handleRadius} required>
+                    <select className="h-7 px-2 mx-2 rounded-md outline outline-1 outline-[#ced4da]" value={radius} onChange={handleRadius} required>
                         <option value="5">5 mi</option>
                         <option value="10">10 mi</option>
                         <option value="15">15 mi</option>
