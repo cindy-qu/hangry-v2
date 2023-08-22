@@ -5,6 +5,7 @@ export const searchSlice = createSlice({
   initialState: {
     cuisine: "",
     price: "1",
+    radius: "10",
   },
   reducers: {
     setCuisine: (state, action) => {
@@ -13,9 +14,12 @@ export const searchSlice = createSlice({
     setPrice: (state, action) => {
       state.price = action.payload;
     },
+    setRadius: (state, action) => {
+      state.radius = action.payload;
+    },
   },
 });
 
-export const { setCuisine, setPrice } = searchSlice.actions;
+export const { setCuisine, setPrice, setRadius } = searchSlice.actions;
 
 export default searchSlice.reducer;
