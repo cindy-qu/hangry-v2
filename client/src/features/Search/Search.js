@@ -2,37 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setCuisine, setPrice, setRadius } from "../../store/searchParams";
-import NavBar from "../../components/layout/NavBar";
 
 //loading icon import
 import { Ring } from '@uiball/loaders'
 
-const Search = () => {
-  
-  
-  const [lat, setLat] = useState(null);
-  const [long, setLong] = useState(null);
-  const [locationError, setLocationError] = useState([]);
+const Search = ({ locationError, lat, long }) => {
 
-  // geolocation API
-  const geolocationAPI = navigator.geolocation;
-  const getUserCoordinates = () => {
-    if (!geolocationAPI) {
-      setLocationError("Geolocation is not enabled!");
-    } else {
-      geolocationAPI.getCurrentPosition(
-        (position) => {
-          const { coords } = position;
-          setLat(coords.latitude);
-          setLong(coords.longitude);
-        },
-        (error) => {
-          setLocationError("Sorry, something went wrong getting your location");
-        },
-      );
-    }
-  };
-  
   const [postcode, setPostcode] = useState(null);
   const locationMessage = postcode ? postcode : "Click for location";
   let navigate = useNavigate();
@@ -56,8 +31,6 @@ const Search = () => {
       />
     </div>
   );
-
-  
 
   const [loadingAdventure, setLoadingAdventure] = useState(false);
   const loadAdventureClassSearch = !loadingAdventure ? (
@@ -202,11 +175,17 @@ const handleOptions = () => {
   };
 
   const handleLocation = () => {
-    getUserCoordinates();
     getLocation();
   };
 
   return (
+    <div className="h-full bg-cover bg-bottom bg-no-repeat  h-[calc(100vh-65px)] w-full bg-[length:64rem] 
+    sm:bg-[length:85rem]
+    md:bg-[length:100rem] 
+    lg:bg-[length:115rem] 
+    xl:bg-[length:130rem] 
+    2xl:bg-[length:135rem]
+    bg-[url('./assets/8505.jpg')] ">
         <div className="
         max-w-[1400px]
         max-h-full
@@ -216,6 +195,7 @@ const handleOptions = () => {
         justify-between 
         mx-auto 
         p-4
+        
         ">
             <div className="
             grid
@@ -241,7 +221,7 @@ const handleOptions = () => {
                         </form>
                     </div>
                     <div className="row-start-3  text-xs">
-                    <button class="h-8 p-2 mt-4 rounded-full bg-sky-700 hover:bg-sky-800 text-white items-center" onClick={handleOptions}>More Options</button>
+                    <button className="h-8 p-2 mt-4 rounded-full bg-sky-700 hover:bg-sky-800 text-white items-center" onClick={handleOptions}>More Options</button>
                     </div>
                 </div>
                 
@@ -270,6 +250,7 @@ const handleOptions = () => {
                     </button>   
                 </div>   */}
             </div>
+        </div>
         </div>
   )
 };

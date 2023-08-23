@@ -1,6 +1,5 @@
 import NavBar from "./components/layout/NavBar";
-import Home from "./components/layout/Home";
-import Landing from "./features/Landing/Landing";
+import Search from "./features/Search/Search";
 import About from "./components/layout/About";
 import RestaurantDetail from "./features/Search/RestaurantDetail";
 import TryAgain from "./features/Search/TryAgain";
@@ -103,16 +102,14 @@ function App() {
 
   return (
     <div className="font-poppins h-screen">
-      {/* {pathname !== "/" && <NavBar setLoginUpdate={setLoginUpdate} />} */}
       <NavBar setLoginUpdate={setLoginUpdate} />
       <Routes>
-        {/* <Route path="/" element={<Landing />} /> */}
         <Route path="/about" element={<About />} />
 
         <Route
           path="/"
           element={
-            <Home
+            <Search
               getUserCoordinates={getUserCoordinates}
               locationError={locationError}
               lat={lat}
