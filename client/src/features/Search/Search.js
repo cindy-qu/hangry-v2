@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setCuisine, setPrice, setRadius } from "../../store/searchParams";
+import NavBar from "../../components/layout/NavBar";
 
 //loading icon import
 import { Ring } from '@uiball/loaders'
@@ -177,70 +178,74 @@ const handleOptions = () => {
   };
 
   return (
-    <div className="
-    max-w-[1400px]
-    max-h-full
-    flex 
-    flex-col 
-    items-left 
-    justify-between 
-    mx-auto 
-    p-4
-     ">
+    <div>
+      <NavBar />
         <div className="
-        grid
-        gap-4
-        grid-cols-2
-        grid-rows-6">
-            <div className="row-start-2 text-left pt-6">
-                <p className="text-2xl font-semibold">Get a restaurant based on your location, price range, and category!</p>
-            </div>
+        max-w-[1400px]
+        max-h-full
+        flex 
+        flex-col 
+        items-left 
+        justify-between 
+        mx-auto 
+        p-4
+        ">
+            <div className="
+            grid
+            gap-4
+            grid-cols-2
+            grid-rows-6">
+                <div className="row-start-2 text-left pt-6">
+                    <p className="text-2xl font-semibold">Get a restaurant based on your location, price range, and category!</p>
+                </div>
 
-            <div className="row-start-3 flex flex-col">
-                <div className = "row-start-3">
-                    <form className=" grid grid-cols-9" onSubmit={handleClick}>
-                    <div onClick={handleLocation} className="h-10 p-2 object-left col-start-1 col-end-5 bg-white rounded-l-lg outline outline-1 outline-[#ced4da]">
+                <div className="row-start-3 flex flex-col">
+                    <div className = "row-start-3">
+                        <form className=" grid grid-cols-9" onSubmit={handleClick}>
+                        <div onClick={handleLocation} className="h-10 p-2 object-left col-start-1 col-end-5 bg-white rounded-l-lg outline outline-1 outline-[#ced4da]">
 
-                        <input type="text" placeholder={locationMessage} disabled/>
+                            <input type="text" placeholder={locationMessage} disabled/>
+                        </div>
+                            <input className="h-10 p-2 col-start-5 col-end-9 outline outline-1 outline-[#ced4da]" type="text" name="food" onChange={handleCuisine} placeholder="Which type of cuisine?" autoComplete = "off" required/>
+                            
+                            <button className="h-10 p-2 rounded-r-lg bg-sky-700 hover:bg-sky-800 text-white items-center outline outline-1 outline-[#ced4da]" type="submit">
+                            {loadClassSearch}
+                            </button>
+                        </form>
                     </div>
-                        <input className="h-10 p-2 col-start-5 col-end-9 outline outline-1 outline-[#ced4da]" type="text" name="food" onChange={handleCuisine} placeholder="Which type of cuisine?" autoComplete = "off" required/>
-                        
-                        <button className="h-10 p-2 rounded-r-lg bg-sky-700 hover:bg-sky-800 text-white items-center outline outline-1 outline-[#ced4da]" type="submit">
-                        {loadClassSearch}
-                        </button>
-                    </form>
+                    <div className="row-start-3  text-xs">
+                    <button class="h-8 p-2 mt-4 rounded-full bg-sky-700 hover:bg-sky-800 text-white items-center" onClick={handleOptions}>More Options</button>
+                    </div>
                 </div>
-                <div className="row-start-3  text-xs">
-                <button class="h-8 p-2 mt-4 rounded-full bg-sky-700 hover:bg-sky-800 text-white items-center" onClick={handleOptions}>More Options</button>
-                </div>
-            </div>
-            
+                
 
-            <div className="row-start-4 text-xs">
-                <div className={options ? "" : "invisible"}>
-                    <select className="h-7 px-2 rounded-md outline outline-1 outline-[#ced4da]" value={price} onChange={handlePrice} required>
-                        <option value="1">$</option>
-                        <option value="2">$$</option>
-                        <option value="3">$$$</option>
-                        <option value="4">$$$$</option>
-                    </select>
-                    <select className="h-7 px-2 mx-2 rounded-md outline outline-1 outline-[#ced4da]" value={radius} onChange={handleRadius} required>
-                        <option value="5">5 mi</option>
-                        <option value="10">10 mi</option>
-                        <option value="15">15 mi</option>
-                        <option value="25">25 mi</option>
-                    </select>
-                </div>
+                <div className="row-start-4 text-xs">
+                    <div className={options ? "" : "invisible"}>
+                        <select className="h-7 px-2 rounded-md outline outline-1 outline-[#ced4da]" value={price} onChange={handlePrice} required>
+                            <option value="1">$</option>
+                            <option value="2">$$</option>
+                            <option value="3">$$$</option>
+                            <option value="4">$$$$</option>
+                        </select>
+                        <select className="h-7 px-2 mx-2 rounded-md outline outline-1 outline-[#ced4da]" value={radius} onChange={handleRadius} required>
+                            <option value="5">5 mi</option>
+                            <option value="10">10 mi</option>
+                            <option value="15">15 mi</option>
+                            <option value="25">25 mi</option>
+                        </select>
+                    </div>
 
+                </div>
+                {/* <p className="pt-10">Get a restaurant only based on your location!</p>
+                <div className = "flex justify-center ">
+                    <button className="mt-3 px-3 py-1 rounded-md bg-sky-700 hover:bg-sky-800 text-white inline-flex items-center" onClick={handleAdventureClick}>
+                        {loadAdventureClassSearch}
+                    </button>   
+                </div>   */}
             </div>
-            {/* <p className="pt-10">Get a restaurant only based on your location!</p>
-            <div className = "flex justify-center ">
-                <button className="mt-3 px-3 py-1 rounded-md bg-sky-700 hover:bg-sky-800 text-white inline-flex items-center" onClick={handleAdventureClick}>
-                    {loadAdventureClassSearch}
-                </button>   
-            </div>   */}
         </div>
     </div>
+
   )
 };
 
