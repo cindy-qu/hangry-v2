@@ -7,9 +7,34 @@ import NavBar from "../../components/layout/NavBar";
 //loading icon import
 import { Ring } from '@uiball/loaders'
 
-const Search = ({ locationError, lat, long }) => {
+const Search = () => {
+  
+  
+  const [lat, setLat] = useState(null);
+  const [long, setLong] = useState(null);
+  const [locationError, setLocationError] = useState([]);
+
+  // geolocation API
+  const geolocationAPI = navigator.geolocation;
+  const getUserCoordinates = () => {
+    if (!geolocationAPI) {
+      setLocationError("Geolocation is not enabled!");
+    } else {
+      geolocationAPI.getCurrentPosition(
+        (position) => {
+          const { coords } = position;
+          setLat(coords.latitude);
+          setLong(coords.longitude);
+        },
+        (error) => {
+          setLocationError("Sorry, something went wrong getting your location");
+        },
+      );
+    }
+  };
+  
   const [postcode, setPostcode] = useState(null);
-  const locationMessage = postcode ? postcode : "Get Location";
+  const locationMessage = postcode ? postcode : "Click for location";
   let navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -31,6 +56,8 @@ const Search = ({ locationError, lat, long }) => {
       />
     </div>
   );
+
+  
 
   const [loadingAdventure, setLoadingAdventure] = useState(false);
   const loadAdventureClassSearch = !loadingAdventure ? (
@@ -131,6 +158,7 @@ const handleOptions = () => {
     }
     const data = await response.json();
     setPostcode(data?.address?.postcode);
+    console.log(postcode);
   }
 
   const handleClick = async (e) => {
@@ -174,12 +202,11 @@ const handleOptions = () => {
   };
 
   const handleLocation = () => {
+    getUserCoordinates();
     getLocation();
   };
 
   return (
-    <div>
-      <NavBar />
         <div className="
         max-w-[1400px]
         max-h-full
@@ -203,10 +230,10 @@ const handleOptions = () => {
                     <div className = "row-start-3">
                         <form className=" grid grid-cols-9" onSubmit={handleClick}>
                         <div onClick={handleLocation} className="h-10 p-2 object-left col-start-1 col-end-5 bg-white rounded-l-lg outline outline-1 outline-[#ced4da]">
-
-                            <input type="text" placeholder={locationMessage} disabled/>
+                          <p className="text-slate-400">{locationMessage}</p>
+                            {/* <input type="text" placeholder={locationMessage} disabled/> */}
                         </div>
-                            <input className="h-10 p-2 col-start-5 col-end-9 outline outline-1 outline-[#ced4da]" type="text" name="food" onChange={handleCuisine} placeholder="Which type of cuisine?" autoComplete = "off" required/>
+                            <input className="h-10 p-2 col-start-5 col-end-9 text-slate-500 outline outline-1 outline-[#ced4da]" type="text" name="food" onChange={handleCuisine} placeholder="Which type of cuisine?" autoComplete = "off" required/>
                             
                             <button className="h-10 p-2 rounded-r-lg bg-sky-700 hover:bg-sky-800 text-white items-center outline outline-1 outline-[#ced4da]" type="submit">
                             {loadClassSearch}
@@ -244,8 +271,6 @@ const handleOptions = () => {
                 </div>   */}
             </div>
         </div>
-    </div>
-
   )
 };
 
