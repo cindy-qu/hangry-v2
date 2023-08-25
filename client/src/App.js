@@ -102,14 +102,15 @@ function App() {
   };
 
   return (
-    <div className="font-poppins">
-      {pathname !== "/" && <NavBar setLoginUpdate={setLoginUpdate} />}
+    <div className="font-poppins h-screen">
+      {/* {pathname !== "/" && <NavBar setLoginUpdate={setLoginUpdate} />} */}
+      <NavBar setLoginUpdate={setLoginUpdate} />
       <Routes>
-        <Route path="/" element={<Landing />} />
+        {/* <Route path="/" element={<Landing />} /> */}
         <Route path="/about" element={<About />} />
 
         <Route
-          path="/search"
+          path="/"
           element={
             <Home
               getUserCoordinates={getUserCoordinates}
