@@ -38,6 +38,7 @@ function App() {
   const { updateAfterBookmark } = useSelector((state) => state.update);
   const { loginUpdate } = useSelector((state) => state.update);
 
+  const [postcode, setPostcode] = useState(null);
   const [restaurantBookmarks, setRestaurantBookmarks] = useState([]);
 
   const dispatch = useDispatch();
@@ -52,7 +53,7 @@ function App() {
   const getUserCoordinates = () => {
     if (!geolocationAPI) {
       dispatch(setLocationError("Geolocation is not enabled!"));
-      console.log(locationError);
+      // console.log(locationError);
     } else {
       geolocationAPI.getCurrentPosition(
         (position) => {
@@ -60,10 +61,11 @@ function App() {
           dispatch(setLat(coords.latitude));
           dispatch(setLong(coords.longitude));
         },
+        
         (error) => {
           dispatch(
             setLocationError(
-              "Sorry, something went wrong getting your location",
+              "Please enable your location!",
             ),
           );
         },
@@ -72,6 +74,77 @@ function App() {
   };
   getUserCoordinates();
 
+  async function getLocation(lat, long){
+    if(lat === null){
+      dispatch(
+        setLocationError(
+          "Please enable your location!",
+        ),
+      );
+    } else {
+      const data = {
+            latitude: lat,
+            longitude: long,
+          };
+          let response = await fetch(
+            `http://localhost:3000/city`, {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data)
+            }
+          );
+      
+          // if (!response.ok) {
+          //   throw new Error("Couldn't get location");
+          // }
+          let responseJson = await response.text();
+          setPostcode(responseJson)
+          // console.log(postcode)
+          // setPostcode(data?.address?.postcode);
+          // console.log(postcode);
+    }
+  }
+
+  useEffect(()=> {
+    getLocation(lat,long)
+  },[lat, long])
+  // getLocation(lat, long);
+  // async function getLocation(lat, long) {
+  // //   fetch('http://localhost:3000/city')
+  // // .then(response => response.text())
+  // // .then(data => {
+  // //   console.log(data);
+  // //   // Use the data here
+  // // })
+  //   const data = {
+  //     latitude: lat,
+  //     longitude: long,
+  //   };
+  //   let response = await fetch(
+  //     `http://localhost:3000/city`, {
+  //       method: "POST",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(data)
+  //     }
+  //   );
+
+  //   // if (!response.ok) {
+  //   //   throw new Error("Couldn't get location");
+  //   // }
+  //   let responseJson = await response.text();
+  //   setPostcode(responseJson)
+  //   console.log(postcode)
+  //   // setPostcode(data?.address?.postcode);
+  //   // console.log(postcode);
+  // }
+
+  // getLocation();
   // automatically login if user_id is in session, load home page
   useEffect(() => {
     fetch("/me").then((res) => {
@@ -114,6 +187,7 @@ function App() {
               locationError={locationError}
               lat={lat}
               long={long}
+              postcode={postcode}
             />
           }
         />

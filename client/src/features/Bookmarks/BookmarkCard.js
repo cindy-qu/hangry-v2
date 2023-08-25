@@ -36,7 +36,7 @@ const BookmarkCard = ({
   const visibleBookmark = visible ? "invisible" : "";
 
   const handleToggle = (e) => {
-    console.log("hi");
+    // console.log("hi");
     setVisible(false);
   };
 

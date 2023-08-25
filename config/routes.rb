@@ -15,6 +15,9 @@ Rails.application.routes.draw do
       get '/yelp', to: 'yelp#fetch'
       post '/search', to: 'yelp#search'
       post '/restaurantsDetail', to: 'yelp#restaurantsDetail'
+      get '/location', to: 'location#fetch'
+      post '/city', to: 'location#city'
+
   #   end
   # end
   # Routing logic: fallback requests for React Router.
