@@ -58,6 +58,7 @@ function App() {
       geolocationAPI.getCurrentPosition(
         (position) => {
           const { coords } = position;
+          // add lat long obj
           dispatch(setLat(coords.latitude));
           dispatch(setLong(coords.longitude));
         },
@@ -75,7 +76,7 @@ function App() {
   getUserCoordinates();
 
   async function getLocation(lat, long){
-    if(lat === null){
+    if(lat === null && long === null){
       dispatch(
         setLocationError(
           "Please enable your location!",
@@ -97,14 +98,10 @@ function App() {
             }
           );
       
-          // if (!response.ok) {
-          //   throw new Error("Couldn't get location");
-          // }
+
           let responseJson = await response.text();
           setPostcode(responseJson)
-          // console.log(postcode)
-          // setPostcode(data?.address?.postcode);
-          // console.log(postcode);
+          console.log(responseJson)
     }
   }
 

@@ -264,7 +264,7 @@ const handleOptions = () => {
                           <p required className="text-slate-400">{message}</p>
                             {/* <input type="text" placeholder={locationMessage} disabled/> */}
                         </div>
-                            <input className="h-10 p-2 col-start-5 col-end-9 text-slate-500 outline outline-1 outline-[#ced4da]" type="text" name="food" onChange={handleCuisine} placeholder="Which type of cuisine?" autoComplete = "off" required/>
+                            <input className="h-10 p-2 col-start-5 col-end-9 text-slate-500 outline outline-1 outline-[#ced4da]" type="text" name="food" onChange={handleCuisine} value={cuisine} placeholder="Which type of cuisine?" autoComplete = "off" required/>
                             
                             <button className="h-10 p-2 rounded-r-lg bg-sky-700 hover:bg-sky-800 text-white items-center outline outline-1 outline-[#ced4da]" type="submit">
                             {loadClassSearch}
