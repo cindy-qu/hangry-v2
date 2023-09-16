@@ -19,7 +19,7 @@ const Search = ({ postcode, locationError, lat, long }) => {
   const [options, setOptions] = useState(false)
   const [loading, setLoading] = useState(false);
   const loadClassSearch = !loading ? (
-    <p>Search</p>
+    <p>Go!</p>
   ) : (
     <div className="flex justify-center">
       <Ring 
@@ -196,7 +196,7 @@ const handleOptions = () => {
   };
 
   return (
-    <div className="h-full bg-cover bg-bottom bg-no-repeat  h-[calc(100vh-65px)] w-full bg-[length:64rem] 
+    <div className="bg-cover bg-bottom bg-no-repeat h-[calc(100vh-64px)] w-full bg-[length:64rem] 
     sm:bg-[length:85rem]
     md:bg-[length:100rem] 
     lg:bg-[length:115rem] 
@@ -205,7 +205,6 @@ const handleOptions = () => {
     bg-[url('./assets/8505.jpg')] ">
         <div className="
         max-w-[1400px]
-        max-h-full
         flex 
         flex-col 
         items-left 
@@ -214,7 +213,7 @@ const handleOptions = () => {
         p-4
         
         ">
-          <div className="flex ">
+
         <div className={visibleLocation}>
           <div className="fixed z-10 overflow-y-auto top-0 w-full left-0">
             <div className="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -247,37 +246,32 @@ const handleOptions = () => {
             </div>
           </div>
         </div>
-      </div>
-            <div className="
-            grid
-            gap-4
-            grid-cols-2
-            grid-rows-6">
-                <div className="row-start-2 text-left pt-6">
+            <div className="w-full md:w-1/2">
+                <div className="relative text-left pt-6 mt-10 mb-6">
                     <p className="text-2xl font-semibold">Get a restaurant based on your location, price range, and category!</p>
                 </div>
 
-                <div className="row-start-3 flex flex-col">
-                    <div className = "row-start-3">
+                <div className="flex flex-col">
+
                         <form className=" grid grid-cols-9" onSubmit={handleClick}>
                         <div  className="h-10 p-2 object-left col-start-1 col-end-5 bg-white rounded-l-lg outline outline-1 outline-[#ced4da]">
-                          <p required className="text-slate-400">{message}</p>
+                          <p required className="truncate text-slate-400">{message}</p>
                             {/* <input type="text" placeholder={locationMessage} disabled/> */}
                         </div>
                             <input className="h-10 p-2 col-start-5 col-end-9 text-slate-500 outline outline-1 outline-[#ced4da]" type="text" name="food" onChange={handleCuisine} value={cuisine} placeholder="Which type of cuisine?" autoComplete = "off" required/>
                             
-                            <button className="h-10 p-2 rounded-r-lg bg-sky-700 hover:bg-sky-800 text-white items-center outline outline-1 outline-[#ced4da]" type="submit">
+                            <button className="h-10 p-1 rounded-r-lg bg-sky-700 hover:bg-sky-800 text-white items-center outline outline-1 outline-[#ced4da]" type="submit">
                             {loadClassSearch}
                             </button>
                         </form>
-                    </div>
-                    <div className="row-start-3  text-xs">
+
+                    <div className="row-start-3  text-xs pt-1">
                     <button className="h-8 p-2 mt-4 rounded-full bg-sky-700 hover:bg-sky-800 text-white items-center" onClick={handleOptions}>More Options</button>
                     </div>
                 </div>
                 
 
-                <div className="row-start-4 text-xs">
+                <div className="text-xs py-3">
                     <div className={options ? "" : "invisible"}>
                         <select className="h-7 px-2 rounded-md outline outline-1 outline-[#ced4da]" value={price} onChange={handlePrice} required>
                             <option value="1">$</option>
