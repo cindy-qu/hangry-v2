@@ -10,6 +10,10 @@ const BookmarkCard = ({
   restaurant_name,
   personal_note,
   setUpdateAfterDelete,
+  setUpdateBookmarkCard,
+  setUpdateBookmarkNote,
+  setUpdateAfter,
+  setUpdateAfterAdding
 }) => {
   function handleDelete() {
     fetch(`/restaurants/${bookmark_id}`, {
@@ -27,27 +31,7 @@ const handleWriting = (e) => {
   writing ? setWriting(false) : setWriting(true);
 };
 
-  const linkAddEdit =
-    personal_note?.personal_note.length > 0
-      ? `editNote/${note_id}`
-      : `addNote/${bookmark_id}`;
-  const showAddEdit =
-    personal_note?.personal_note.length > 0
-      ? (writing ? "Save " : "Edit ")
-      : (writing ? "Save " : "Add Note ")
-  const fontAwesome =
-    writing
-      ? "fa-solid fa-check fa-lg"
-      : "fa-regular fa-pen-to-square";
-
-  const [visible, setVisible] = useState(true);
-  const visibleBookmark = visible ? "invisible" : "";
-
-
-
-
   const handleToggle = (e) => {
-    // console.log("hi");
     setVisible(false);
   };
 
@@ -59,7 +43,80 @@ const handleWriting = (e) => {
   const [noteContent, setNoteContent] = useState("")
   const [errors, setErrors] = useState([]);
   const [updated, setUpdated] = useState(false);
+  
   //function creates a brand new note on a bookmark for user
+  const handleNoteAdd = (e) => {
+
+    const formData = {
+      personal_note: noteContent,
+      user_id: user_id,
+      restaurant_id: bookmark_id,
+    };
+
+    fetch(`/bookmarks`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((userData) => {
+          setUpdateBookmarkNote(userData);
+          setUpdated((updated) => !updated);
+        });
+      } else {
+        res.json().then((err) => setErrors(err.errors));
+      }
+    }).then(setUpdateAfterAdding);
+    setWriting(false);
+  };
+
+  const handleNoteEdit = () => {
+
+    fetch(`/bookmarks/${note_id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        personal_note: noteContent,
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((updateB) => {
+          setUpdateBookmarkCard(updateB);
+          setUpdated((updated) => !updated);
+          // setPersonalNote("")
+        });
+      } else {
+        res.json().then((err) => {
+          setErrors(err.errors);
+        });
+      }
+    }).then(setUpdateAfterAdding);
+    setWriting(false);
+  }
+
+  //directs user through the add flow or the edit flow depending on if a note already exists
+  const addOrEdit =
+    personal_note?.personal_note.length > 0
+      ? handleNoteEdit
+      : handleNoteAdd;
+  const showAddEdit =
+    personal_note?.personal_note.length > 0
+      ? (writing ? "Save " : "Edit ")
+      : (writing ? "Save " : "Add Note ")
+  const fontAwesome =
+    writing
+      ? "fa-solid fa-check fa-lg"
+      : "fa-regular fa-pen-to-square";
+
+  const [visible, setVisible] = useState(true);
+  const visibleBookmark = visible ? "invisible" : "";
+  
+
+
   // const handleCreateNote = (e) => {
   //   const formData = {
   //     personal_note: noteContent,
@@ -140,12 +197,12 @@ const handleWriting = (e) => {
                   defaultValue={personal_note?.personal_note}
                   onChange={(e) => {
                     setNoteContent(e.target.value);
-                    console.log(noteContent);
+
                   }}>
                 </textarea>
               </div>
               <div className="flex h-1/2 items-center justify-center">
-                <button className="rounded-full bg-slate-200 text-sm text-slate-500 px-2 py-1" id="close-CSS" onClick={handleWriting}>
+                <button className="rounded-full bg-slate-200 text-sm text-slate-500 px-2 py-1" id="close-CSS" onClick={addOrEdit}>
                   {showAddEdit}
                   <i className={fontAwesome}></i>
                 </button> 

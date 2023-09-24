@@ -7,21 +7,26 @@ const MyBookmarks = ({
   setUser,
   restaurantBookmarks,
   setUpdateAfterBookmark,
+  setUpdateBookmarkNote,
+  setUpdateAfter,
+  setUpdateAfterAdding,
+  user2,
+  setUpdateAfterDelete
 }) => {
-  const [user2, setUser2] = useState(null);
-  const [updateAfterDelete, setUpdateAfterDelete] = useState(false);
-  // const [updateAfterBookmark, setUpdateAfterBookmark] = useState([])
+  // const [user2, setUser2] = useState(null);
+  // const [updateAfterDelete, setUpdateAfterDelete] = useState(false);
+  // // const [updateAfterBookmark, setUpdateAfterBookmark] = useState([])
 
-  useEffect(() => {
-    fetch("/me").then((res) => {
-      if (res.ok) {
-        res.json().then((userData) => {
-          setUser2(userData);
-          setUpdateAfterBookmark(userData);
-        });
-      }
-    });
-  }, [updateAfterDelete]);
+  // useEffect(() => {
+  //   fetch("/me").then((res) => {
+  //     if (res.ok) {
+  //       res.json().then((userData) => {
+  //         setUser2(userData);
+  //         setUpdateAfterBookmark(userData);
+  //       });
+  //     }
+  //   });
+  // }, [updateAfterDelete]);
 
   if (!user) return <LoginContainer setUser={setUser} />;
   return (
@@ -32,6 +37,10 @@ const MyBookmarks = ({
         bookmarks={user2?.restaurants}
         setUpdateAfterDelete={setUpdateAfterDelete}
         restaurantBookmarks={restaurantBookmarks}
+        setUpdateBookmarkNote={setUpdateBookmarkNote}
+        setUpdateAfter={setUpdateAfter}
+        setUpdateAfterBookmark={setUpdateAfterBookmark}
+        setUpdateAfterAdding={setUpdateAfterAdding}
       />
     </div>
   );

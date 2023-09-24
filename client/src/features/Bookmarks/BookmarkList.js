@@ -7,6 +7,11 @@ const BookmarkList = ({
   bookmarks,
   setUpdateAfterDelete,
   user_id,
+  setUpdateBookmarkNote,
+  setUpdateBookmarkCard,
+  setUpdateAfter,
+  setUpdateAfterBookmark,
+  setUpdateAfterAdding
 }) => {
   // console.log(bookmarks)
 
@@ -22,6 +27,11 @@ const BookmarkList = ({
         note_id={bookmark?.bookmarks[0]?.id}
         setUpdateAfterDelete={setUpdateAfterDelete}
         user_id={user_id}
+        setUpdateBookmarkNote={setUpdateBookmarkNote}
+        setUpdateBookmarkCard={setUpdateBookmarkCard}
+        setUpdateAfter={setUpdateAfter}
+        setUpdateAfterBookmark={setUpdateAfterBookmark}
+        setUpdateAfterAdding={setUpdateAfterAdding}
       />
     );
   });
