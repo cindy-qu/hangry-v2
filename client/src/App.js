@@ -17,6 +17,7 @@ import { setLat, setLong, setLocationError } from "./store/location";
 import { setUser } from "./store/user";
 import {
   setUpdateAfterDelete,
+  setUpdateAfter,
   setUpdateBookmarkCard,
   setUpdateBookmarkNote,
   setUpdateAfterBookmark,
@@ -33,6 +34,7 @@ function App() {
   const { user } = useSelector((state) => state.userInfo);
 
   const { updateAfterDelete } = useSelector((state) => state.update);
+  const { updateAfter } = useSelector((state) => state.update);
   const { updateBookmarkCard } = useSelector((state) => state.update);
   const { updateBookmarkNote } = useSelector((state) => state.update);
   const { updateAfterBookmark } = useSelector((state) => state.update);
@@ -108,6 +110,18 @@ function App() {
   useEffect(()=> {
     getLocation(lat,long)
   },[lat, long])
+const [user2, setUser2] = useState(null);
+const [updateAfterAdding, setUpdateAfterAdding] = useState(false)
+  useEffect(() => {
+    fetch("/me").then((res) => {
+      if (res.ok) {
+        res.json().then((userData) => {
+          setUser2(userData);
+          setUpdateAfterAdding(userData);
+        });
+      }
+    });
+  }, [updateAfterDelete, updateAfterAdding]);
   // getLocation(lat, long);
   // async function getLocation(lat, long) {
   // //   fetch('http://localhost:3000/city')
@@ -157,8 +171,11 @@ function App() {
     updateBookmarkNote,
     updateBookmarkCard,
     updateAfterDelete,
+    updateAfter,
     loginUpdate,
   ]);
+
+  
 
   const fetchRestaurantBookmarks = () => {
     fetch(`/restaurants`).then((res) => {
@@ -203,6 +220,12 @@ function App() {
               setUpdateAfterBookmark={setUpdateAfterBookmark}
               restaurantBookmarks={restaurantBookmarks}
               setUpdateAfterDelete={setUpdateAfterDelete}
+              updateAfterDelete={updateAfterDelete}
+              setUpdateBookmarkNote={setUpdateBookmarkNote}
+              setUpdateBookmarkCard={setUpdateBookmarkCard}
+              setUpdateAfter={setUpdateAfter}
+              setUpdateAfterAdding={setUpdateAfterAdding}
+              user2={user2}
             />
           }
         />

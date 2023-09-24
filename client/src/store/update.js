@@ -4,6 +4,7 @@ export const updateSlice = createSlice({
   name: "update",
   initialState: {
     updateAfterDelete: false,
+    updateAfter: false,
     updateBookmarkCard: [],
     updateBookmarkNote: [],
     updateAfterBookmark: [],
@@ -18,6 +19,7 @@ export const updateSlice = createSlice({
 
 export const {
   setUpdateAfterDelete,
+  setUpdateAfter,
   setUpdateBookmarkCard,
   setUpdateBookmarkNote,
   setUpdateAfterBookmark,
