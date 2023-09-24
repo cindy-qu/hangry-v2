@@ -101,27 +101,29 @@ function App() {
           );
       
 
-          let responseJson = await response.text();
-          setPostcode(responseJson)
-          console.log(responseJson)
+          let responseJson = await response.json()
+          // setPostcode(responseJson)
+          setPostcode(responseJson.data.address.township ? `${responseJson.data.address.township}, ${responseJson.data.address.state}` : 
+          `${responseJson.data.address.town}, ${responseJson.data.address.state}`)
     }
   }
 
   useEffect(()=> {
     getLocation(lat,long)
   },[lat, long])
-const [user2, setUser2] = useState(null);
-const [updateAfterAdding, setUpdateAfterAdding] = useState(false)
-  useEffect(() => {
-    fetch("/me").then((res) => {
-      if (res.ok) {
-        res.json().then((userData) => {
-          setUser2(userData);
-          setUpdateAfterAdding(userData);
-        });
-      }
-    });
-  }, [updateAfterDelete, updateAfterAdding]);
+// const [user2, setUser2] = useState(null);
+// const [updateAfterAdding, setUpdateAfterAdding] = useState(false)
+//   useEffect(() => {
+//     console.log('hoi')
+//     fetch("/me").then((res) => {
+//       if (res.ok) {
+//         res.json().then((userData) => {
+//           setUser2(userData);
+//           setUpdateAfterAdding(userData);
+//         });
+//       }
+//     });
+//   }, [updateAfterDelete]);
   // getLocation(lat, long);
   // async function getLocation(lat, long) {
   // //   fetch('http://localhost:3000/city')
@@ -219,13 +221,10 @@ const [updateAfterAdding, setUpdateAfterAdding] = useState(false)
               setUser={setUser}
               setUpdateAfterBookmark={setUpdateAfterBookmark}
               restaurantBookmarks={restaurantBookmarks}
-              setUpdateAfterDelete={setUpdateAfterDelete}
-              updateAfterDelete={updateAfterDelete}
               setUpdateBookmarkNote={setUpdateBookmarkNote}
               setUpdateBookmarkCard={setUpdateBookmarkCard}
               setUpdateAfter={setUpdateAfter}
-              setUpdateAfterAdding={setUpdateAfterAdding}
-              user2={user2}
+
             />
           }
         />

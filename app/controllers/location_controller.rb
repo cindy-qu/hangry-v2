@@ -5,7 +5,7 @@ class LocationController < ApplicationController
   
     def city
         results = Geocoder.search([params[:latitude], params[:longitude]])
-        user_city = results.first
-        render json: user_city
+        user_location = results.first
+        render json: user_location
     end
 end
