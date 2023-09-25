@@ -83,7 +83,6 @@ const handleOptions = () => {
       longitude: long,
       price: price,
     };
-    console.log(data)
     let response = await fetch("https://hangryv2.onrender.com/search", {
       method: "POST",
       headers: {

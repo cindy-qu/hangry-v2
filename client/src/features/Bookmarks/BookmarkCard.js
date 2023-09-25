@@ -85,7 +85,7 @@ const handleWriting = (e) => {
     }).then((res) => {
       if (res.ok) {
         res.json().then((updateB) => {
-          setUpdateBookmarkCard(updateB);
+          setUpdateBookmarkNote(updateB);
           setUpdated((updated) => !updated);
           // setPersonalNote("")
         });
