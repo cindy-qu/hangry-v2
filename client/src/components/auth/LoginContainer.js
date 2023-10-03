@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const LoginContainer = ({ setUser }) => {
+const LoginContainer = ({ setUser, setUpdateNavLogin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
@@ -21,6 +21,7 @@ const LoginContainer = ({ setUser }) => {
         res.json().then((userLogin) => {
           setUser(userLogin);
           navigate("/");
+          setUpdateNavLogin(userLogin)
         });
       } else {
         res.json().then((err) => setErrors(err.errors));
@@ -83,9 +84,7 @@ const LoginContainer = ({ setUser }) => {
                 >
                   Password
                 </label>
-                {/* <div className="text-sm">
-                                <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
-                            </div> */}
+
               </div>
               <div className="mt-2">
                 <input

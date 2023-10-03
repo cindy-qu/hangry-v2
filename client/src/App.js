@@ -8,6 +8,7 @@ import AddBookmarkNote from "./features/Bookmarks/AddBookmarkNote";
 import EditBookmarkCard from "./features/Bookmarks/EditBookmarkCard";
 import LoginContainer from "./components/auth/LoginContainer";
 import Signup from "./components/auth/Signup";
+import Logout from "./components/auth/Logout";
 import Calendar from "./features/Calendar/Calendar";
 
 import "./App.css";
@@ -24,7 +25,7 @@ import {
   setLoginUpdate,
 } from "./store/update";
 import { useState, useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   const { lat } = useSelector((state) => state.geoLocation);
@@ -42,13 +43,13 @@ function App() {
 
   const [postcode, setPostcode] = useState(null);
   const [restaurantBookmarks, setRestaurantBookmarks] = useState([]);
+  const [updateNavLogin, setUpdateNavLogin] = useState(null)
+  const [updateNavLogout, setUpdateNavLogout] = useState(null)
 
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState([]);
 
-  // for scrolling from landing page to search page
-  const { pathname } = useLocation();
 
   // geolocation API
   const geolocationAPI = navigator.geolocation;
@@ -111,55 +112,12 @@ function App() {
   useEffect(()=> {
     getLocation(lat,long)
   },[lat, long])
-// const [user2, setUser2] = useState(null);
-// const [updateAfterAdding, setUpdateAfterAdding] = useState(false)
-//   useEffect(() => {
-//     console.log('hoi')
-//     fetch("/me").then((res) => {
-//       if (res.ok) {
-//         res.json().then((userData) => {
-//           setUser2(userData);
-//           setUpdateAfterAdding(userData);
-//         });
-//       }
-//     });
-//   }, [updateAfterDelete]);
-  // getLocation(lat, long);
-  // async function getLocation(lat, long) {
-  // //   fetch('http://localhost:3000/city')
-  // // .then(response => response.text())
-  // // .then(data => {
-  // //   console.log(data);
-  // //   // Use the data here
-  // // })
-  //   const data = {
-  //     latitude: lat,
-  //     longitude: long,
-  //   };
-  //   let response = await fetch(
-  //     `http://localhost:3000/city`, {
-  //       method: "POST",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(data)
-  //     }
-  //   );
 
-  //   // if (!response.ok) {
-  //   //   throw new Error("Couldn't get location");
-  //   // }
-  //   let responseJson = await response.text();
-  //   setPostcode(responseJson)
-  //   console.log(postcode)
-  //   // setPostcode(data?.address?.postcode);
-  //   // console.log(postcode);
-  // }
 
   // getLocation();
   // automatically login if user_id is in session, load home page
   useEffect(() => {
+
     fetch("/me").then((res) => {
       if (res.ok) {
         res.json().then((userData) => {
@@ -174,7 +132,9 @@ function App() {
     updateBookmarkCard,
     updateAfterDelete,
     updateAfter,
+    updateNavLogin,
     loginUpdate,
+    updateNavLogout
   ]);
 
   
@@ -191,8 +151,9 @@ function App() {
 
   return (
     <div className="font-poppins h-screen">
-      <NavBar setLoginUpdate={setLoginUpdate} />
+      <NavBar setLoginUpdate={setLoginUpdate} loginUpdate={loginUpdate} setUpdateNavLogin={setUpdateNavLogin} setUpdateNavLogout={setUpdateNavLogout} />
       <Routes>
+        <Route path="/signout" element={<Logout user={user} setUser={setUser} setUpdateNavLogout={setUpdateNavLogout}/>}/>
         <Route path="/about" element={<About />} />
 
         <Route
@@ -229,7 +190,7 @@ function App() {
           }
         />
 
-        <Route path="/login" element={<LoginContainer setUser={setUser} />} />
+        <Route path="/login" element={<LoginContainer setUser={setUser} setUpdateNavLogin={setUpdateNavLogin}/>} />
         <Route path="/signup" element={<Signup setUser={setUser} />} />
 
         <Route

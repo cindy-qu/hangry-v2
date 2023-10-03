@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../store/user";
 
-const NavBar = ({ setLoginUpdate }) => {
+const NavBar = ({ setLoginUpdate, loginUpdate, setUpdateNavLogin, setUpdateNavLogout }) => {
 
   const { user } = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
@@ -13,10 +13,10 @@ const NavBar = ({ setLoginUpdate }) => {
       if (res.ok) {
         res.json().then((userData) => {
           dispatch(setUser(userData));
-          setLoginUpdate(userData);
+          setUpdateNavLogin(userData)
         });
       }
-    });
+    })
   }, []);
 
 
@@ -33,10 +33,11 @@ const NavBar = ({ setLoginUpdate }) => {
       method: "DELETE",
     }).then((res) => {
       if (res.ok) {
-        setUser(null);
+        dispatch(setUser(null));
         navigate("/");
+        setUpdateNavLogout(null)
       }
-    });
+    })
   }
 
   const handleSignUser = (e) => {
